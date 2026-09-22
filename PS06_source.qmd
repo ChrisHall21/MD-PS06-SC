@@ -103,7 +103,7 @@ Do you think the relationship between `hs` and `income` is strong or weak, linea
 :::
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 1 Answers"}
-* Delete this and put your text answer here.
+* The relationship is linear with the linear slopes and.
 :::
 
 ::: {.callout-note icon="false" title="Problem 2"}
