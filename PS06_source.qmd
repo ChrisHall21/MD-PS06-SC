@@ -355,7 +355,12 @@ Generate a regression model with `voles` as the response variable `y` and `veg` 
 ::: {.callout-important icon="false" collapse="false" title="Problem 17 Answers"}
 ```{r}
 # Type your code and comments inside the code chunk
-
+voles_mod <- lm(voles ~ veg + soil, data = vole_trapping)
+summary(voles_mod)
+ggplot(vole_trapping, aes(x = veg, y = voles, color = soil)) +
+  geom_point() +
+  geom_parallel_slopes(se = FALSE) +
+  labs(x = "Vegetation Cover (%)", y = "Vole Count", title = "Vole Count by Vegetation and Soil Type")
 ```
 :::
 
@@ -364,7 +369,7 @@ Would you recommend to a manager that they try to protect sites with high or low
 :::
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 18 Answers"}
-* Delete this and put your text answer here.
+* I would recommend protecting sites with **high vegetation cover** because the coefficient for "veg" is positive and highly significant (p < 0.001) which shows that as the percent of vegetation cover increases, the vole population increases as well.
 :::
 
 ::: {.callout-note icon="false" title="Problem 19"}
@@ -372,11 +377,14 @@ Dry sites are typically a lot less money to purchase and maintain for conservati
 :::
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 19 Answers"}
-* Delete this and put your text answer here.
+* Conservation organizations should maintain at least approximately **56.1% vegetation cover** at a dry site to support a minimum population of 30 voles.
 
 ```{r}
 # Type your code and comments inside the code chunk
-
+dry_grid <- data.frame(veg = seq(0, 100, by = 0.1), soil = "dry")
+dry_grid$pred_voles <- predict(voles_mod, newdata = dry_grid)
+requried_veg <- dry_grid$veg[which.min(abs(dry_grid$pred_voles - 30))]
+requried_veg
 ```
 :::
 
@@ -387,11 +395,12 @@ The Nature Conservancy is looking at purchasing a site for this species (in the 
 ::: {.callout-important icon="false" collapse="false" title="Problem 20 Answers"}
 ```{r}
 # Type your code and comments inside the code chunk
-
-
+moist_site <- data.frame(veg = 40, soil = "moist")
+predicted_voles <- predict(voles_mod, newdata = moist_site)
+predicted_voles
 ```
 
-* Delete this and put your text answer here.
+* The model predicts that a site with moist soil and 40% vegatation cover can support a possible vole population of appoximately **34.93** (or 35) voles.
 :::
 
 # Turning in Your Work
