@@ -103,7 +103,7 @@ Do you think the relationship between `hs` and `income` is strong or weak, linea
 :::
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 1 Answers"}
-* The relationship is linear with the linear slopes and.
+* The relationship is linear with the linear slopes and weak with substantial amount of vertical scatter.
 :::
 
 ::: {.callout-note icon="false" title="Problem 2"}
@@ -113,10 +113,12 @@ Which regression line (high `urbanization` or low `urbanization`) in @fig-urb ha
 ::: {.callout-important icon="false" collapse="false" title="Problem 2 Answers"}
 ```{r}
 # Type your code and comments inside the code chunk
-
+mod_full <- lm(income ~ hs + urbanization, data = hate_crimes)
+get_regression_table(mod_full)
+kable(summary(mod_full)$coefficients)
 ```
 
-* Delete this and put your text answer here.
+* The **high urbanization** regression line has the larger intercept since it is $113,725.19 and low urbanization is ($113,725.193 - $7,333.326) = $121,058,52.
 :::
 
 ::: {.callout-note icon="false" title="Problem 3"}
@@ -124,7 +126,7 @@ Does the slope look fairly similar (parallel) for the two levels of urbanization
 :::
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 3 Answers"}
-* Delete this and put your text answer here.
+* Yes the two slopes look fairly similar (parallel) for high and low urbanization.
 :::
 
 ::: {.callout-note icon="false" title="Problem 4"}
@@ -132,11 +134,12 @@ Based on the data visualization in @fig-urb, and your answer to 3, do you think 
 :::
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 4 Answers"}
-* Delete this and put your text answer here.
+* Yes it would be best to run a parallel slopes model.
 
 ```{r}
 # Type your code and comments inside the code chunk
-
+mod_parallel <- lm(income ~ hs + urbanization, data = hate_crimes)
+get_regression_table(mod_parallel)
 ```
 :::
 
@@ -147,7 +150,13 @@ Create a data visualization comparing median household income at "low" and "high
 ::: {.callout-important icon="false" collapse="false" title="Problem 5 Answers"}
 ```{r}
 # Type your code and comments inside the code chunk
-
+ggplot(hate_crimes, aes(x = urbanization, y = income)) +
+  geom_boxplot(fill = "steelblue", alpha = 0.7) +
+  labs(
+    x = "Level of Urbanization (Low vs High)",
+    y = "Median Household Income ($)",
+    title = "Comparison of Median Household Income by Urbanization Levels"
+  )
 ```
 :::
 
@@ -159,12 +168,22 @@ Run a linear regression model that examines the relationship between household `
 ```{r}
 library(scales)  # Used to format numbers and for dollars
 # Type your code and comments inside the code chunk
-
+med_income_model <- lm(income ~ hs + urbanization, data = hate_crimes)
+get_regression_table(med_income_model)
 ```
 
 ```{r}
 # Type your code and comments here
-
+ggplot(hate_crimes, aes(x = hs, y = income, color = urbanization)) +
+  geom_point(alpha = 0.5) +
+  geom_parallel_slopes(se = FALSE) +
+  labs(
+    x = "High School Graduation Rate (hs)",
+    y = "Median Household Income ($)",
+    color = "Urbanization Level",
+    title = "Parallel Slopes Model: Income vs. High School Education"
+  ) +
+  scale_y_continuous(labels = label_dollar())
 ```
 :::
 
@@ -173,7 +192,7 @@ Is the intercept the same for the states with a "low" and "high" level of urbani
 :::
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 7 Answers"}
-* Delete this and put your text answer here.
+* No, the intercepts are not the same, but the slopes are indeed the same.
 :::
 
 ::: {.callout-note icon="false" title="Problem 8"}
@@ -183,12 +202,16 @@ What is the slope for the regression line of the states with a "high" level of u
 ::: {.callout-important icon="false" collapse="false" title="Problem 8 Answers"}
 ```{r}
 # Type your code and comments inside the code chunk
+high_slope <- 1987
+cat("Slope for High Urbanization:", high_slope, "dollars per percent increase\n")
 
+high_intercept <- -113725
+cat("Intercept for High Urbanization:", high_intercept, "dollars\n")
 ```
 
-* Delete this and put your text answer here.
+* The slope for High Urbanization is **$1,987**.
 
-* Delete this and put your text answer here.
+* The intercept for High Urbanization is **-$113.725**.
 :::
 
 ::: {.callout-note icon="false" title="Problem 9"}
@@ -196,9 +219,9 @@ What is the slope for the regression line of the states with a "low" level of ur
 :::
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 9 Answers"}
-* Delete this and put your text answer here.
+* The slope for Low Urbanization is **$1,987**.
 
-* Delete this and put your text answer here.
+* The intercept for Low Urbanization is **(-$113,725 + (-$7,333))** = **-$121,058**.
 :::
 
 ::: {.callout-note icon="false" title="Problem 10"}
@@ -206,7 +229,7 @@ Based on your regression table output (and the data visualizations), is median h
 :::
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 10 Answers"}
-* Delete this and put your text answer here.
+* Median household income is greater in states with higher levels of urbanization by **$7,333**.
 :::
 
 ::: {.callout-note icon="false" title="Problem 11"}
@@ -214,7 +237,7 @@ For every increase in 1 percentage point of high-school educated adults, what is
 :::
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 11 Answers"}
-* Delete this and put your text answer here.
+* The associated increase in the median household income of a state with 1 percent increase of high school educated adults is **$1,987**.
 :::
 
 ::: {.callout-note icon="false" title="Problem 12"}
@@ -229,7 +252,7 @@ $$\widehat{\text{income}} = `r comma(coef(summary(med_income_model))[1])` + `r r
 :::
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 12 Answers"}
-- Your $LaTeX$ answer here.
+- $$\widehat{\text{income}} = -113,725 + 1986.79 \times \text{hs}$$
 :::
 
 ::: {.callout-note icon="false" title="Problem 13"}
@@ -239,10 +262,11 @@ What would you predict as the median household income for a state with a **high*
 ::: {.callout-important icon="false" collapse="false" title="Problem 13 Answers"}
 ```{r}
 # Type your code and comments inside the code chunk
-
+predicted_income <- -113725.193 + (1986.794 * 85)
+cat("predicted Median Household Income:", dollar(predicted_income), "\n")
 ```
 
-* Delete this and put your text answer here.
+* The predicted median household income with a state with igh urbanization and 85% of share adults have high school degrees is **$55,152.30**.
 :::
 
 ::: {.callout-note icon="false" title="Problem 14"}
@@ -252,10 +276,11 @@ What would you predict as the median household income for a state with a **low**
 ::: {.callout-important icon="false" collapse="false" title="Problem 14 Answers"}
 ```{r}
 # Type your code and comments inside the code chunk
-
+pred_income_14 <- -113725.192 + (1986.79 * 85) - 7333.326
+cat("Predicted Income (Low, 85% hs):", dollar(pred_income_14), "\n")
 ```
 
-* Delete this and put your text answer here.
+* The predicted income of a state with low urbanization and 85% of share adults have a high school degree is **$47,818.63**.
 :::
 
 ::: {.callout-note icon="false" title="Problem 15"}
@@ -263,7 +288,7 @@ What would you predict as the median household income for a state with a **low**
 :::
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 15 Answers"}
-* Delete this and put your text answer here.
+* The predicted income of a state with low urbanization and 30% of share adults have a high school degree is **-$61,454.82**.
 :::
 
 ::: {.callout-note icon="false" title="Problem 16"}
@@ -273,16 +298,19 @@ What was the observed `income` value for Maine (row 2)? What was the prediction 
 ::: {.callout-important icon="false" collapse="false" title="Problem 16 Answers"}
 ```{r}
 # Type your code and comments inside the code chunk
-
+regression_points <- get_regression_points(med_income_model)
+maine_data <- regression_points %>%
+  slice(2)
+print(maine_data)
 ```
 
-* Delete this and put your text answer here.
+* Observed income value for Maine: **$51,710**.
 
-* Delete this and put your text answer here.
+* Predicted for Maine according to the model: **$57,753**.
 
-* Delete this and put your text answer here.
+* Residual: **-$6,043**.
 
-* Delete this and put your text answer here.
+* Our model **overestimated** the median household income for Maine by **$6,043**.
 :::
 
 # Independent Analysis

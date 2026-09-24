@@ -135,7 +135,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Last modified on September 22, 2026 13:23:26 Eastern Daylight Time</p>
+      <p class="date">Last modified on September 24, 2026 10:56:27 Eastern Daylight Time</p>
     </div>
   </div>
   
@@ -302,7 +302,7 @@ Figure&nbsp;1: Median household income versus percent of adults with high-school
 <div id="callout-5" class="callout-5-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <ul>
-<li>The relationship is linear with the linear slopes and.</li>
+<li>The relationship is linear with the linear slopes and weak with substantial amount of vertical scatter.</li>
 </ul>
 </div>
 </div>
@@ -333,10 +333,64 @@ Figure&nbsp;1: Median household income versus percent of adults with high-school
 <div id="callout-7" class="callout-7-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and comments inside the code chunk</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and comments inside the code chunk</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>mod_full <span class="ot">&lt;-</span> <span class="fu">lm</span>(income <span class="sc">~</span> hs <span class="sc">+</span> urbanization, <span class="at">data =</span> hate_crimes)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">get_regression_table</span>(mod_full)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 7
+  term              estimate std_error statistic p_value lower_ci upper_ci
+  &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1 intercept         -113725.    23553.     -4.83       0 -161163.  -66287.
+2 hs                   1987.      273.      7.28       0    1437.    2537.
+3 urbanization: low   -7333.     1858.     -3.95       0  -11075.   -3592.</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">summary</span>(mod_full)<span class="sc">$</span>coefficients)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 17%">
+<col style="width: 16%">
+<col style="width: 14%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Estimate</th>
+<th style="text-align: right;">Std. Error</th>
+<th style="text-align: right;">t value</th>
+<th style="text-align: right;">Pr(&gt;|t|)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">-113725.193</td>
+<td style="text-align: right;">23552.9187</td>
+<td style="text-align: right;">-4.828497</td>
+<td style="text-align: right;">0.0000162</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">hs</td>
+<td style="text-align: right;">1986.794</td>
+<td style="text-align: right;">272.9303</td>
+<td style="text-align: right;">7.279490</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">urbanizationlow</td>
+<td style="text-align: right;">-7333.326</td>
+<td style="text-align: right;">1857.6592</td>
+<td style="text-align: right;">-3.947616</td>
+<td style="text-align: right;">0.0002745</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <ul>
-<li>Delete this and put your text answer here.</li>
+<li>The <strong>high urbanization</strong> regression line has the larger intercept since it is $113,725.19 and low urbanization is ($113,725.193 - $7,333.326) = $121,058,52.</li>
 </ul>
 </div>
 </div>
@@ -367,7 +421,7 @@ Figure&nbsp;1: Median household income versus percent of adults with high-school
 <div id="callout-9" class="callout-9-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <ul>
-<li>Delete this and put your text answer here.</li>
+<li>Yes the two slopes look fairly similar (parallel) for high and low urbanization.</li>
 </ul>
 </div>
 </div>
@@ -398,10 +452,20 @@ Figure&nbsp;1: Median household income versus percent of adults with high-school
 <div id="callout-11" class="callout-11-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <ul>
-<li>Delete this and put your text answer here.</li>
+<li>Yes it would be best to run a parallel slopes model.</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and comments inside the code chunk</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and comments inside the code chunk</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>mod_parallel <span class="ot">&lt;-</span> <span class="fu">lm</span>(income <span class="sc">~</span> hs <span class="sc">+</span> urbanization, <span class="at">data =</span> hate_crimes)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">get_regression_table</span>(mod_parallel)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 7
+  term              estimate std_error statistic p_value lower_ci upper_ci
+  &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1 intercept         -113725.    23553.     -4.83       0 -161163.  -66287.
+2 hs                   1987.      273.      7.28       0    1437.    2537.
+3 urbanization: low   -7333.     1858.     -3.95       0  -11075.   -3592.</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -432,7 +496,21 @@ Figure&nbsp;1: Median household income versus percent of adults with high-school
 <div id="callout-13" class="callout-13-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and comments inside the code chunk</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and comments inside the code chunk</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(hate_crimes, <span class="fu">aes</span>(<span class="at">x =</span> urbanization, <span class="at">y =</span> income)) <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Level of Urbanization (Low vs High)"</span>,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Median Household Income ($)"</span>,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Comparison of Median Household Income by Urbanization Levels"</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="PS06_source_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768"></p>
+</figure>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -463,11 +541,38 @@ Figure&nbsp;1: Median household income versus percent of adults with high-school
 <div id="callout-15" class="callout-15-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)  <span class="co"># Used to format numbers and for dollars</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and comments inside the code chunk</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)  <span class="co"># Used to format numbers and for dollars</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and comments inside the code chunk</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>med_income_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(income <span class="sc">~</span> hs <span class="sc">+</span> urbanization, <span class="at">data =</span> hate_crimes)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">get_regression_table</span>(med_income_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 7
+  term              estimate std_error statistic p_value lower_ci upper_ci
+  &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1 intercept         -113725.    23553.     -4.83       0 -161163.  -66287.
+2 hs                   1987.      273.      7.28       0    1437.    2537.
+3 urbanization: low   -7333.     1858.     -3.95       0  -11075.   -3592.</code></pre>
+</div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and comments here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and comments here</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(hate_crimes, <span class="fu">aes</span>(<span class="at">x =</span> hs, <span class="at">y =</span> income, <span class="at">color =</span> urbanization)) <span class="sc">+</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_parallel_slopes</span>(<span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"High School Graduation Rate (hs)"</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Median Household Income ($)"</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Urbanization Level"</span>,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Parallel Slopes Model: Income vs. High School Education"</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="fu">label_dollar</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="PS06_source_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768"></p>
+</figure>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -498,7 +603,7 @@ Figure&nbsp;1: Median household income versus percent of adults with high-school
 <div id="callout-17" class="callout-17-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <ul>
-<li>Delete this and put your text answer here.</li>
+<li>No, the intercepts are not the same, but the slopes are indeed the same.</li>
 </ul>
 </div>
 </div>
@@ -529,11 +634,21 @@ Figure&nbsp;1: Median household income versus percent of adults with high-school
 <div id="callout-19" class="callout-19-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and comments inside the code chunk</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and comments inside the code chunk</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>high_slope <span class="ot">&lt;-</span> <span class="dv">1987</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Slope for High Urbanization:"</span>, high_slope, <span class="st">"dollars per percent increase</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Slope for High Urbanization: 1987 dollars per percent increase</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>high_intercept <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">113725</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Intercept for High Urbanization:"</span>, high_intercept, <span class="st">"dollars</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Intercept for High Urbanization: -113725 dollars</code></pre>
+</div>
 </div>
 <ul>
-<li><p>Delete this and put your text answer here.</p></li>
-<li><p>Delete this and put your text answer here.</p></li>
+<li><p>The slope for High Urbanization is <strong>$1,987</strong>.</p></li>
+<li><p>The intercept for High Urbanization is <strong>-$113.725</strong>.</p></li>
 </ul>
 </div>
 </div>
@@ -564,8 +679,8 @@ Figure&nbsp;1: Median household income versus percent of adults with high-school
 <div id="callout-21" class="callout-21-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <ul>
-<li><p>Delete this and put your text answer here.</p></li>
-<li><p>Delete this and put your text answer here.</p></li>
+<li><p>The slope for Low Urbanization is <strong>$1,987</strong>.</p></li>
+<li><p>The intercept for Low Urbanization is <strong>(-$113,725 + (-$7,333))</strong> = <strong>-$121,058</strong>.</p></li>
 </ul>
 </div>
 </div>
@@ -596,7 +711,7 @@ Figure&nbsp;1: Median household income versus percent of adults with high-school
 <div id="callout-23" class="callout-23-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <ul>
-<li>Delete this and put your text answer here.</li>
+<li>Median household income is greater in states with higher levels of urbanization by <strong>$7,333</strong>.</li>
 </ul>
 </div>
 </div>
@@ -627,7 +742,7 @@ Figure&nbsp;1: Median household income versus percent of adults with high-school
 <div id="callout-25" class="callout-25-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <ul>
-<li>Delete this and put your text answer here.</li>
+<li>The associated increase in the median household income of a state with 1 percent increase of high school educated adults is <strong>$1,987</strong>.</li>
 </ul>
 </div>
 </div>
@@ -659,7 +774,7 @@ Figure&nbsp;1: Median household income versus percent of adults with high-school
 <div id="callout-27" class="callout-27-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <ul>
-<li>Your <span class="math inline">\(LaTeX\)</span> answer here.</li>
+<li><span class="math display">\[\widehat{\text{income}} = -113,725 + 1986.79 \times \text{hs}\]</span></li>
 </ul>
 </div>
 </div>
@@ -690,10 +805,15 @@ Figure&nbsp;1: Median household income versus percent of adults with high-school
 <div id="callout-29" class="callout-29-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and comments inside the code chunk</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and comments inside the code chunk</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>predicted_income <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">113725.193</span> <span class="sc">+</span> (<span class="fl">1986.794</span> <span class="sc">*</span> <span class="dv">85</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"predicted Median Household Income:"</span>, <span class="fu">dollar</span>(predicted_income), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>predicted Median Household Income: $55,152.30 </code></pre>
+</div>
 </div>
 <ul>
-<li>Delete this and put your text answer here.</li>
+<li>The predicted median household income with a state with igh urbanization and 85% of share adults have high school degrees is <strong>$55,152.30</strong>.</li>
 </ul>
 </div>
 </div>
@@ -724,10 +844,15 @@ Figure&nbsp;1: Median household income versus percent of adults with high-school
 <div id="callout-31" class="callout-31-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and comments inside the code chunk</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and comments inside the code chunk</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>pred_income_14 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">113725.192</span> <span class="sc">+</span> (<span class="fl">1986.79</span> <span class="sc">*</span> <span class="dv">85</span>) <span class="sc">-</span> <span class="fl">7333.326</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Predicted Income (Low, 85% hs):"</span>, <span class="fu">dollar</span>(pred_income_14), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Predicted Income (Low, 85% hs): $47,818.63 </code></pre>
+</div>
 </div>
 <ul>
-<li>Delete this and put your text answer here.</li>
+<li>The predicted income of a state with low urbanization and 85% of share adults have a high school degree is <strong>$47,818.63</strong>.</li>
 </ul>
 </div>
 </div>
@@ -758,7 +883,7 @@ Figure&nbsp;1: Median household income versus percent of adults with high-school
 <div id="callout-33" class="callout-33-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <ul>
-<li>Delete this and put your text answer here.</li>
+<li>The predicted income of a state with low urbanization and 30% of share adults have a high school degree is <strong>-$61,454.82</strong>.</li>
 </ul>
 </div>
 </div>
@@ -789,13 +914,23 @@ Figure&nbsp;1: Median household income versus percent of adults with high-school
 <div id="callout-35" class="callout-35-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and comments inside the code chunk</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and comments inside the code chunk</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>regression_points <span class="ot">&lt;-</span> <span class="fu">get_regression_points</span>(med_income_model)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>maine_data <span class="ot">&lt;-</span> regression_points <span class="sc">%&gt;%</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">2</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(maine_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 6
+     ID income    hs urbanization income_hat residual
+  &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;             &lt;dbl&gt;    &lt;dbl&gt;
+1     2  51710    90 low              57753.   -6043.</code></pre>
+</div>
 </div>
 <ul>
-<li><p>Delete this and put your text answer here.</p></li>
-<li><p>Delete this and put your text answer here.</p></li>
-<li><p>Delete this and put your text answer here.</p></li>
-<li><p>Delete this and put your text answer here.</p></li>
+<li><p>Observed income value for Maine: <strong>$51,710</strong>.</p></li>
+<li><p>Predicted for Maine according to the model: <strong>$57,753</strong>.</p></li>
+<li><p>Residual: <strong>-$6,043</strong>.</p></li>
+<li><p>Our model <strong>overestimated</strong> the median household income for Maine by <strong>$6,043</strong>.</p></li>
 </ul>
 </div>
 </div>
@@ -831,14 +966,14 @@ Figure&nbsp;2: Vole in the wild
 </div>
 <div class="callout-body-container callout-body">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"http://bit.ly/2IgDF0E"</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">dir.exists</span>(<span class="st">"./data/"</span>)){</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="st">"./data/"</span>)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">file.exists</span>(<span class="st">"./data/vole_trapping.csv"</span>)){</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">download.file</span>(url, <span class="at">destfile =</span> <span class="st">"./data/vole_trapping.csv"</span>)</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>vole_trapping <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./data/vole_trapping.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"http://bit.ly/2IgDF0E"</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">dir.exists</span>(<span class="st">"./data/"</span>)){</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="st">"./data/"</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">file.exists</span>(<span class="st">"./data/vole_trapping.csv"</span>)){</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">download.file</span>(url, <span class="at">destfile =</span> <span class="st">"./data/vole_trapping.csv"</span>)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>vole_trapping <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./data/vole_trapping.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -875,7 +1010,7 @@ Figure&nbsp;2: Vole in the wild
 <div id="callout-38" class="callout-38-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and comments inside the code chunk</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and comments inside the code chunk</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -940,7 +1075,7 @@ Figure&nbsp;2: Vole in the wild
 <li>Delete this and put your text answer here.</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and comments inside the code chunk</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and comments inside the code chunk</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -971,7 +1106,7 @@ Figure&nbsp;2: Vole in the wild
 <div id="callout-44" class="callout-44-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and comments inside the code chunk</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and comments inside the code chunk</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li>Delete this and put your text answer here.</li>
@@ -1023,7 +1158,7 @@ Tip
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.6.1 (2026-06-24)
 Platform: x86_64-redhat-linux-gnu
@@ -1051,26 +1186,26 @@ other attached packages:
 [5] scales_1.4.0     knitr_1.51      
 
 loaded via a namespace (and not attached):
- [1] generics_0.1.4         tidyr_1.3.2            lattice_0.22-9        
- [4] stringi_1.8.7          hms_1.1.4              digest_0.6.39         
- [7] magrittr_2.0.5         evaluate_1.0.5         grid_4.6.1            
-[10] timechange_0.4.0       RColorBrewer_1.1-3     fastmap_1.2.0         
-[13] Matrix_1.7-5           operator.tools_1.6.3.1 jsonlite_2.0.0        
-[16] backports_1.5.1        mgcv_1.9-4             purrr_1.2.2           
-[19] infer_1.1.0            cli_3.6.6              crayon_1.5.3          
-[22] rlang_1.2.0            splines_4.6.1          bit64_4.8.0           
-[25] withr_3.0.2            yaml_2.3.12            otel_0.2.0            
-[28] parallel_4.6.1         tools_4.6.1            tzdb_0.5.0            
-[31] broom_1.0.12           vctrs_0.7.3            R6_2.6.1              
-[34] lifecycle_1.0.5        lubridate_1.9.5        snakecase_0.11.1      
-[37] stringr_1.6.0          bit_4.6.0              htmlwidgets_1.6.4     
-[40] vroom_1.7.1            janitor_2.2.1          pkgconfig_2.0.3       
-[43] pillar_1.11.1          gtable_0.3.6           glue_1.8.1            
-[46] xfun_0.57              tibble_3.3.1           tidyselect_1.2.1      
-[49] rstudioapi_0.18.0      dichromat_2.0-0.1      farver_2.1.2          
-[52] nlme_3.1-169           htmltools_0.5.9        labeling_0.4.3        
-[55] rmarkdown_2.31         formula.tools_1.7.1    compiler_4.6.1        
-[58] S7_0.2.2              </code></pre>
+ [1] utf8_1.2.6             generics_0.1.4         tidyr_1.3.2           
+ [4] lattice_0.22-9         stringi_1.8.7          hms_1.1.4             
+ [7] digest_0.6.39          magrittr_2.0.5         evaluate_1.0.5        
+[10] grid_4.6.1             timechange_0.4.0       RColorBrewer_1.1-3    
+[13] fastmap_1.2.0          Matrix_1.7-5           operator.tools_1.6.3.1
+[16] jsonlite_2.0.0         backports_1.5.1        mgcv_1.9-4            
+[19] purrr_1.2.2            infer_1.1.0            cli_3.6.6             
+[22] crayon_1.5.3           rlang_1.2.0            splines_4.6.1         
+[25] bit64_4.8.0            withr_3.0.2            yaml_2.3.12           
+[28] otel_0.2.0             parallel_4.6.1         tools_4.6.1           
+[31] tzdb_0.5.0             broom_1.0.12           vctrs_0.7.3           
+[34] R6_2.6.1               lifecycle_1.0.5        lubridate_1.9.5       
+[37] snakecase_0.11.1       stringr_1.6.0          bit_4.6.0             
+[40] htmlwidgets_1.6.4      vroom_1.7.1            janitor_2.2.1         
+[43] pkgconfig_2.0.3        pillar_1.11.1          gtable_0.3.6          
+[46] glue_1.8.1             xfun_0.57              tibble_3.3.1          
+[49] tidyselect_1.2.1       rstudioapi_0.18.0      dichromat_2.0-0.1     
+[52] farver_2.1.2           nlme_3.1-169           htmltools_0.5.9       
+[55] labeling_0.4.3         rmarkdown_2.31         formula.tools_1.7.1   
+[58] compiler_4.6.1         S7_0.2.2              </code></pre>
 </div>
 </div>
 </section>
